@@ -78,7 +78,26 @@ function setupEditModal(user) {
     modal.style.display = 'flex';
     // Pre-fill form
     document.getElementById('editName').value = user.name || '';
-    document.getElementById('editPhone').value = user.phone || '';
+    
+    // Split phone number into country code and number
+    let countryCode = '';
+    let phoneNumber = user.phone || '';
+    if (phoneNumber.startsWith('+')) {
+      const parts = phoneNumber.split(' ');
+      if (parts.length > 1) {
+        countryCode = parts[0];
+        phoneNumber = parts.slice(1).join(' ');
+      } else {
+        // Fallback: try to split at first 3 digits after + (this is a guess)
+        // Or just leave it as is if we can't be sure
+        // Better: just let user fix it if it's not spaced
+        countryCode = ''; 
+        phoneNumber = user.phone || '';
+      }
+    }
+    document.getElementById('editCountryCode').value = countryCode;
+    document.getElementById('editPhone').value = phoneNumber;
+
     picPreview.src = user.profilePic || '/images/favicon-32x32.png';
     base64Image = user.profilePic || '';
     
@@ -122,9 +141,13 @@ function setupEditModal(user) {
     e.preventDefault();
     const token = localStorage.getItem('token');
     
+    const countryCode = document.getElementById('editCountryCode').value.trim();
+    const phoneNumber = document.getElementById('editPhone').value.trim();
+    const combinedPhone = countryCode ? `${countryCode} ${phoneNumber}` : phoneNumber;
+
     const updatedData = {
       name: document.getElementById('editName').value,
-      phone: document.getElementById('editPhone').value,
+      phone: combinedPhone,
       profilePic: base64Image,
       address: {
         street: document.getElementById('editStreet').value,
