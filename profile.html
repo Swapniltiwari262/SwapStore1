@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="style.css" />
+    <title>My Profile - SwapStore</title>
+    <style>
+      body {
+        background-color: #f0f2f5;
+        min-height: 100vh;
+        padding: 0; /* Reset body padding for full-width footer */
+        margin: 0;
+      }
+      .profile-section {
+        padding: 6rem 2rem;
+      }
+      .profile-container {
+        max-width: 100rem;
+        margin: 0 auto;
+        background: #fff;
+        border-radius: 2.5rem;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+        overflow: hidden;
+      }
+      .profile-banner {
+        height: 20rem;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        position: relative;
+      }
+      .profile-header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: -8rem;
+        padding: 0 4rem 4rem;
+        border-bottom: 1px solid #f1f5f9;
+        text-align: center;
+        position: relative;
+        z-index: 10;
+      }
+      .profile-pic-container {
+        width: 16rem;
+        height: 16rem;
+        border-radius: 50%;
+        padding: 0.6rem;
+        background: #fff;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        margin-bottom: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+      .profile-pic {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover; /* Ensures image covers area without distortion */
+        display: block;
+      }
+      .profile-header h2 {
+        font-size: 3.6rem;
+        color: #1a202c;
+        font-weight: 800;
+        margin-bottom: 0.5rem;
+      }
+      .profile-header p {
+        font-size: 1.8rem;
+        color: #718096;
+        font-weight: 500;
+      }
+      .profile-body {
+        padding: 5rem;
+      }
+      .info-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 3rem;
+      }
+      .section-title {
+        grid-column: span 2;
+        font-size: 2.4rem;
+        font-weight: 800;
+        color: #2d3748;
+        margin: 3rem 0 1rem;
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+      }
+      .section-title i {
+        color: var(--main-color);
+        background: #ebf3fe;
+        padding: 1rem;
+        border-radius: 1rem;
+        font-size: 1.8rem;
+      }
+      .section-title::after {
+        content: '';
+        flex: 1;
+        height: 2px;
+        background: #f1f5f9;
+      }
+      .info-card {
+        background: #ffffff;
+        padding: 2.5rem;
+        border-radius: 2rem;
+        border: 1px solid #f1f5f9;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+      }
+      .info-card:hover {
+        border-color: var(--main-color);
+        box-shadow: 0 10px 20px rgba(83, 91, 242, 0.1);
+        transform: translateY(-3px);
+      }
+      .info-card label {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        font-weight: 700;
+        font-size: 1.3rem;
+        color: #a0aec0;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+      .info-card p {
+        font-size: 1.9rem;
+        color: #1a202c;
+        font-weight: 700;
+      }
+      .full-width {
+        grid-column: span 2;
+      }
+      .logout-container {
+        margin-top: 5rem;
+        display: flex;
+        justify-content: center;
+      }
+      .logout-btn {
+        padding: 1.6rem 5rem;
+        background: #fff5f5;
+        color: #e53e3e;
+        border: 2px solid #fed7d7;
+        border-radius: 1.5rem;
+        font-size: 1.8rem;
+        font-weight: 800;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 1.2rem;
+      }
+      .logout-btn:hover {
+        background: #e53e3e;
+        color: white;
+        border-color: #e53e3e;
+        transform: scale(1.05);
+        box-shadow: 0 10px 20px rgba(229, 62, 62, 0.2);
+      }
+      @media (max-width: 768px) {
+        .info-grid {
+          grid-template-columns: 1fr;
+        }
+        .section-title, .full-width {
+          grid-column: span 1;
+        }
+        .profile-body {
+          padding: 3rem 2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <header class="section-navbar" style="background: white; padding: 1.5rem 0; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000;">
+        <div class="container" style="padding: 0 2.4rem;">
+          <div class="navbar-brand">
+            <a href="index.html">
+              <img src="/images/swap-store-high-resolution-logo-transparent.png" alt="logo" class="logo" width="110px" />
+            </a>
+          </div>
+          <nav class="navbar">
+            <ul>
+              <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
+              <li class="nav-item"><a href="about.html" class="nav-link">about</a></li>
+              <li class="nav-item"><a href="products.html" class="nav-link">products</a></li>
+              <li class="nav-item"><a href="contact.html" class="nav-link">contact</a></li>
+              <li class="nav-item">
+                <a href="addToCart.html" class="nav-link add-to-cart-button" id="cartValue">
+                  <i class="fa-solid fa-cart-shopping"> 0 </i>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+
+    <main class="profile-section">
+      <div class="profile-container">
+        <div class="profile-banner"></div>
+        <div class="profile-header">
+          <div class="profile-pic-container">
+            <img src="/images/favicon-32x32.png" alt="Profile" class="profile-pic" id="userPic" />
+          </div>
+          <h2 id="userNameHeader">Loading...</h2>
+          <p id="userEmailHeader">Loading...</p>
+          <button id="editProfileBtn" class="edit-btn" style="margin-top: 1.5rem; padding: 1rem 3rem; background: var(--supporting-color); color: var(--main-color); border: none; border-radius: 1rem; font-weight: 700; cursor: pointer; transition: all 0.3s ease;">
+            <i class="fa-solid fa-pen-to-square"></i> Edit Profile
+          </button>
+        </div>
+
+        <!-- Edit Profile Modal -->
+        <div id="editProfileModal" style="display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.5); backdrop-filter: blur(5px); align-items: center; justify-content: center;">
+          <div style="background-color: #fefefe; padding: 4rem; border-radius: 2.5rem; width: 90%; max-width: 70rem; box-shadow: 0 25px 50px rgba(0,0,0,0.15); animation: modalIn 0.3s ease-out;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem;">
+              <h2 style="font-size: 2.8rem; font-weight: 800; color: var(--buttonColor);">Edit Your Profile</h2>
+              <span id="closeModal" style="color: #aaa; font-size: 3rem; font-weight: bold; cursor: pointer;">&times;</span>
+            </div>
+            
+            <form id="editProfileForm" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+              <div class="form-group full-width">
+                <label style="font-size: 1.4rem; font-weight: 700; color: #666; margin-bottom: 0.5rem; display: block;">Full Name</label>
+                <input type="text" id="editName" style="width: 100%; padding: 1.2rem; border-radius: 1rem; border: 2px solid #edf2f7; font-size: 1.6rem;" required />
+              </div>
+              <div class="form-group">
+                <label style="font-size: 1.4rem; font-weight: 700; color: #666; margin-bottom: 0.5rem; display: block;">Phone Number</label>
+                <input type="tel" id="editPhone" style="width: 100%; padding: 1.2rem; border-radius: 1rem; border: 2px solid #edf2f7; font-size: 1.6rem;" />
+              </div>
+              <div class="form-group full-width">
+                <label style="font-size: 1.4rem; font-weight: 700; color: #666; margin-bottom: 0.5rem; display: block;">Profile Picture</label>
+                <div style="display: flex; align-items: center; gap: 2rem; background: #f8fafc; padding: 1.5rem; border-radius: 1.5rem; border: 2px dashed #edf2f7;">
+                  <img id="editPicPreview" src="/images/favicon-32x32.png" style="width: 7rem; height: 7rem; border-radius: 50%; object-fit: cover; border: 2px solid #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.1);" />
+                  <div style="flex: 1;">
+                    <label for="editPicFile" style="display: inline-block; padding: 0.8rem 2rem; background: var(--main-color); color: white; border-radius: 0.8rem; font-size: 1.4rem; font-weight: 700; cursor: pointer; margin-bottom: 0.5rem;">
+                      <i class="fa-solid fa-cloud-arrow-up"></i> Upload Image
+                    </label>
+                    <input type="file" id="editPicFile" accept="image/*" style="display: none;" />
+                    <p style="font-size: 1.2rem; color: #718096; margin: 0;">JPG, PNG or GIF. Max 200 KB.</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="section-title full-width">Shipping Address</div>
+              
+              <div class="form-group full-width">
+                <label style="font-size: 1.4rem; font-weight: 700; color: #666; margin-bottom: 0.5rem; display: block;">Street</label>
+                <input type="text" id="editStreet" style="width: 100%; padding: 1.2rem; border-radius: 1rem; border: 2px solid #edf2f7; font-size: 1.6rem;" />
+              </div>
+              <div class="form-group">
+                <label style="font-size: 1.4rem; font-weight: 700; color: #666; margin-bottom: 0.5rem; display: block;">City</label>
+                <input type="text" id="editCity" style="width: 100%; padding: 1.2rem; border-radius: 1rem; border: 2px solid #edf2f7; font-size: 1.6rem;" />
+              </div>
+              <div class="form-group">
+                <label style="font-size: 1.4rem; font-weight: 700; color: #666; margin-bottom: 0.5rem; display: block;">State</label>
+                <input type="text" id="editState" style="width: 100%; padding: 1.2rem; border-radius: 1rem; border: 2px solid #edf2f7; font-size: 1.6rem;" />
+              </div>
+              <div class="form-group">
+                <label style="font-size: 1.4rem; font-weight: 700; color: #666; margin-bottom: 0.5rem; display: block;">Zip Code</label>
+                <input type="text" id="editZip" style="width: 100%; padding: 1.2rem; border-radius: 1rem; border: 2px solid #edf2f7; font-size: 1.6rem;" />
+              </div>
+              <div class="form-group">
+                <label style="font-size: 1.4rem; font-weight: 700; color: #666; margin-bottom: 0.5rem; display: block;">Country</label>
+                <input type="text" id="editCountry" style="width: 100%; padding: 1.2rem; border-radius: 1rem; border: 2px solid #edf2f7; font-size: 1.6rem;" />
+              </div>
+              
+              <button type="submit" class="auth-btn full-width" style="margin-top: 2rem;">Save Changes</button>
+            </form>
+          </div>
+        </div>
+
+        <style>
+          @keyframes modalIn {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+          #editProfileBtn:hover {
+            background: var(--main-color);
+            color: white;
+            transform: translateY(-2px);
+          }
+        </style>
+
+        <div class="profile-body">
+          <div class="info-grid">
+            <div class="section-title">
+              <i class="fa-solid fa-user-gear"></i>
+              Personal Information
+            </div>
+            
+            <div class="info-card">
+              <label><i class="fa-solid fa-id-card"></i> Full Name</label>
+              <p id="profileName">--</p>
+            </div>
+            <div class="info-card">
+              <label><i class="fa-solid fa-envelope"></i> Email Address</label>
+              <p id="profileEmail">--</p>
+            </div>
+            <div class="info-card">
+              <label><i class="fa-solid fa-phone"></i> Phone Number</label>
+              <p id="profilePhone">--</p>
+            </div>
+            <div class="info-card">
+              <label><i class="fa-solid fa-shield-halved"></i> Account Role</label>
+              <p id="profileRole">User</p>
+            </div>
+            
+            <div class="section-title">
+              <i class="fa-solid fa-truck-fast"></i>
+              Shipping Details
+            </div>
+
+            <div class="info-card full-width">
+              <label><i class="fa-solid fa-location-dot"></i> Street Address</label>
+              <p id="profileStreet">--</p>
+            </div>
+            <div class="info-card">
+              <label><i class="fa-solid fa-city"></i> City</label>
+              <p id="profileCity">--</p>
+            </div>
+            <div class="info-card">
+              <label><i class="fa-solid fa-map"></i> State / Province</label>
+              <p id="profileState">--</p>
+            </div>
+            <div class="info-card">
+              <label><i class="fa-solid fa-barcode"></i> Zip / Postal Code</label>
+              <p id="profileZip">--</p>
+            </div>
+            <div class="info-card">
+              <label><i class="fa-solid fa-earth-americas"></i> Country</label>
+              <p id="profileCountry">--</p>
+            </div>
+          </div>
+          
+          <div class="logout-container">
+            <button id="profileLogoutBtn" class="logout-btn">
+              <i class="fa-solid fa-right-from-bracket"></i> Sign Out
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script type="module" src="navAuth.js"></script>
+    <script type="module" src="profile.js"></script>
+  </body>
+</html>

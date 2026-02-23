@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Register - SwapStore</title>
+    <style>
+      body {
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      .auth-section {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 4rem 2rem;
+      }
+      .auth-container {
+        max-width: 65rem;
+        width: 100%;
+        padding: 4rem;
+        background: #ffffff;
+        border-radius: 2rem;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+      }
+      .auth-header {
+        text-align: center;
+        margin-bottom: 3.5rem;
+      }
+      .auth-header h2 {
+        font-size: 3.2rem;
+        color: var(--buttonColor);
+        margin-bottom: 1rem;
+        font-weight: 800;
+      }
+      .auth-header p {
+        font-size: 1.6rem;
+        color: #666;
+      }
+      .auth-form {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+      }
+      .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+      }
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+        position: relative;
+      }
+      .form-group.full-width {
+        grid-column: span 2;
+      }
+      .form-group label {
+        font-weight: 600;
+        font-size: 1.5rem;
+        color: var(--buttonColor);
+      }
+      .form-group input {
+        padding: 1.4rem 1.6rem;
+        border: 2px solid #edf2f7;
+        border-radius: 1.2rem;
+        font-size: 1.6rem;
+        transition: all 0.3s ease;
+        background: #f8fafc;
+      }
+      .form-group input:focus {
+        border-color: var(--main-color);
+        background: #fff;
+        outline: none;
+        box-shadow: 0 0 0 4px rgba(83, 91, 242, 0.1);
+      }
+      .password-toggle {
+        position: absolute;
+        right: 1.6rem;
+        top: 4.2rem;
+        cursor: pointer;
+        color: #a0aec0;
+        font-size: 1.8rem;
+        transition: color 0.3s;
+      }
+      .password-toggle:hover {
+        color: var(--main-color);
+      }
+      .address-title {
+        grid-column: span 2;
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--buttonColor);
+        margin-top: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid #edf2f7;
+      }
+      .auth-btn {
+        width: 100%;
+        padding: 1.6rem;
+        background: var(--main-color);
+        color: white;
+        border: none;
+        border-radius: 1.2rem;
+        font-size: 1.8rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 2rem;
+        box-shadow: 0 4px 6px rgba(83, 91, 242, 0.2);
+      }
+      .auth-btn:hover {
+        background: #4349d8;
+        transform: translateY(-2px);
+        box-shadow: 0 7px 14px rgba(83, 91, 242, 0.3);
+      }
+      .auth-link {
+        text-align: center;
+        margin-top: 3rem;
+        font-size: 1.6rem;
+        color: #666;
+      }
+      .auth-link a {
+        color: var(--main-color);
+        font-weight: 700;
+        text-decoration: none;
+      }
+      .auth-link a:hover {
+        text-decoration: underline;
+      }
+      @media (max-width: 600px) {
+        .form-grid {
+          grid-template-columns: 1fr;
+        }
+        .form-group.full-width {
+          grid-column: span 1;
+        }
+        .address-title {
+          grid-column: span 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <header class="section-navbar" style="background: white; padding: 1.5rem 0; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+      <div class="container" style="padding: 0 2.4rem;">
+        <div class="navbar-brand">
+          <a href="index.html">
+            <img src="/images/swap-store-high-resolution-logo-transparent.png" alt="logo" class="logo" width="100px" />
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main class="auth-section">
+      <div class="auth-container">
+        <div class="auth-header">
+          <h2>Create Your Account</h2>
+          <p>Join SwapStore for a premium shopping experience.</p>
+        </div>
+        <form id="registerForm" class="auth-form">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="name">Full Name</label>
+              <input type="text" id="name" placeholder="John Doe" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" placeholder="john@example.com" required />
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <div class="phone-input-group" style="display: flex; gap: 1rem;">
+                <select id="countryCode" required style="width: 12rem; padding: 1.4rem 1rem; border: 2px solid #edf2f7; border-radius: 1.2rem; background: #f8fafc; font-size: 1.5rem; font-weight: 600; color: var(--buttonColor); cursor: pointer; outline: none; appearance: none; background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23a0aec0%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'); background-repeat: no-repeat; background-position: right 1rem top 50%; background-size: 1rem auto;">
+                  <option value="" disabled>Code</option>
+                  <option value="+93">🇦🇫 +93</option>
+                  <option value="+355">🇦🇱 +355</option>
+                  <option value="+213">🇩🇿 +213</option>
+                  <option value="+376">🇦🇩 +376</option>
+                  <option value="+244">🇦🇴 +244</option>
+                  <option value="+54">🇦🇷 +54</option>
+                  <option value="+374">🇦🇲 +374</option>
+                  <option value="+61">🇦🇺 +61</option>
+                  <option value="+43">🇦🇹 +43</option>
+                  <option value="+994">🇦🇿 +994</option>
+                  <option value="+973">🇧🇭 +973</option>
+                  <option value="+880">🇧🇩 +880</option>
+                  <option value="+375">🇧🇾 +375</option>
+                  <option value="+32">🇧🇪 +32</option>
+                  <option value="+501">🇧🇿 +501</option>
+                  <option value="+229">🇧🇯 +229</option>
+                  <option value="+975">🇧🇹 +975</option>
+                  <option value="+591">🇧🇴 +591</option>
+                  <option value="+387">🇧🇦 +387</option>
+                  <option value="+267">🇧🇼 +267</option>
+                  <option value="+55">🇧🇷 +55</option>
+                  <option value="+673">🇧🇳 +673</option>
+                  <option value="+359">🇧🇬 +359</option>
+                  <option value="+226">🇧🇫 +226</option>
+                  <option value="+257">🇧🇮 +257</option>
+                  <option value="+855">🇰🇭 +855</option>
+                  <option value="+237">🇨🇲 +237</option>
+                  <option value="+1">🇨🇦 +1</option>
+                  <option value="+238">🇨🇻 +238</option>
+                  <option value="+236">🇨🇫 +236</option>
+                  <option value="+235">🇹🇩 +235</option>
+                  <option value="+56">🇨🇱 +56</option>
+                  <option value="+86">🇨🇳 +86</option>
+                  <option value="+57">🇨🇴 +57</option>
+                  <option value="+269">🇰🇲 +269</option>
+                  <option value="+242">🇨🇬 +242</option>
+                  <option value="+243">🇨🇩 +243</option>
+                  <option value="+506">🇨🇷 +506</option>
+                  <option value="+385">🇭🇷 +385</option>
+                  <option value="+53">🇨🇺 +53</option>
+                  <option value="+357">🇨🇾 +357</option>
+                  <option value="+420">🇨🇿 +420</option>
+                  <option value="+45">🇩🇰 +45</option>
+                  <option value="+253">🇩🇯 +253</option>
+                  <option value="+1">🇩🇲 +1</option>
+                  <option value="+1">🇩🇴 +1</option>
+                  <option value="+593">🇪🇨 +593</option>
+                  <option value="+20">🇪🇬 +20</option>
+                  <option value="+503">🇸🇻 +503</option>
+                  <option value="+240">🇬🇶 +240</option>
+                  <option value="+291">🇪🇷 +291</option>
+                  <option value="+372">🇪🇪 +372</option>
+                  <option value="+251">🇪🇹 +251</option>
+                  <option value="+679">🇫🇯 +679</option>
+                  <option value="+358">🇫🇮 +358</option>
+                  <option value="+33">🇫🇷 +33</option>
+                  <option value="+241">🇬🇦 +241</option>
+                  <option value="+220">🇬🇲 +220</option>
+                  <option value="+995">🇬🇪 +995</option>
+                  <option value="+49">🇩🇪 +49</option>
+                  <option value="+233">🇬🇭 +233</option>
+                  <option value="+30">🇬🇷 +30</option>
+                  <option value="+502">🇬🇹 +502</option>
+                  <option value="+224">🇬🇳 +224</option>
+                  <option value="+245">🇬🇼 +245</option>
+                  <option value="+592">🇬🇾 +592</option>
+                  <option value="+509">🇭🇹 +509</option>
+                  <option value="+504">🇭🇳 +504</option>
+                  <option value="+36">🇭🇺 +36</option>
+                  <option value="+354">🇮🇸 +354</option>
+                  <option value="+91" selected>🇮🇳 +91</option>
+                  <option value="+62">🇮🇩 +62</option>
+                  <option value="+98">🇮🇷 +98</option>
+                  <option value="+964">🇮🇶 +964</option>
+                  <option value="+353">🇮🇪 +353</option>
+                  <option value="+972">🇮🇱 +972</option>
+                  <option value="+39">🇮🇹 +39</option>
+                  <option value="+225">🇨🇮 +225</option>
+                  <option value="+1">🇯🇲 +1</option>
+                  <option value="+81">🇯🇵 +81</option>
+                  <option value="+962">🇯🇴 +962</option>
+                  <option value="+7">🇰🇿 +7</option>
+                  <option value="+254">🇰🇪 +254</option>
+                  <option value="+686">🇰🇮 +686</option>
+                  <option value="+965">🇰🇼 +965</option>
+                  <option value="+996">🇰🇬 +996</option>
+                  <option value="+856">🇱🇦 +856</option>
+                  <option value="+371">🇱🇻 +371</option>
+                  <option value="+961">🇱🇧 +961</option>
+                  <option value="+266">🇱🇸 +266</option>
+                  <option value="+231">🇱🇷 +231</option>
+                  <option value="+218">🇱🇾 +218</option>
+                  <option value="+423">🇱🇮 +423</option>
+                  <option value="+370">🇱🇹 +370</option>
+                  <option value="+352">🇱🇺 +352</option>
+                  <option value="+389">🇲🇰 +389</option>
+                  <option value="+261">🇲🇬 +261</option>
+                  <option value="+265">🇲🇼 +265</option>
+                  <option value="+60">🇲🇾 +60</option>
+                  <option value="+960">🇲🇻 +960</option>
+                  <option value="+223">🇲🇱 +223</option>
+                  <option value="+356">🇲🇹 +356</option>
+                  <option value="+692">🇲🇭 +692</option>
+                  <option value="+222">🇲🇷 +222</option>
+                  <option value="+230">🇲🇺 +230</option>
+                  <option value="+52">🇲🇽 +52</option>
+                  <option value="+691">🇫🇲 +691</option>
+                  <option value="+373">🇲🇩 +373</option>
+                  <option value="+377">🇲🇨 +377</option>
+                  <option value="+976">🇲🇳 +976</option>
+                  <option value="+382">🇲🇪 +382</option>
+                  <option value="+212">🇲🇦 +212</option>
+                  <option value="+258">🇲🇿 +258</option>
+                  <option value="+95">🇲🇲 +95</option>
+                  <option value="+264">🇳🇦 +264</option>
+                  <option value="+674">🇳🇷 +674</option>
+                  <option value="+977">🇳🇵 +977</option>
+                  <option value="+31">🇳🇱 +31</option>
+                  <option value="+64">🇳🇿 +64</option>
+                  <option value="+505">🇳🇮 +505</option>
+                  <option value="+227">🇳🇪 +227</option>
+                  <option value="+234">🇳🇬 +234</option>
+                  <option value="+850">🇰🇵 +850</option>
+                  <option value="+47">🇳🇴 +47</option>
+                  <option value="+968">🇴🇲 +968</option>
+                  <option value="+92">🇵🇰 +92</option>
+                  <option value="+680">🇵🇼 +680</option>
+                  <option value="+507">🇵🇦 +507</option>
+                  <option value="+675">🇵🇬 +675</option>
+                  <option value="+595">🇵🇾 +595</option>
+                  <option value="+51">🇵🇪 +51</option>
+                  <option value="+63">🇵🇭 +63</option>
+                  <option value="+48">🇵🇱 +48</option>
+                  <option value="+351">🇵🇹 +351</option>
+                  <option value="+974">🇶🇦 +974</option>
+                  <option value="+40">🇷🇴 +40</option>
+                  <option value="+7">🇷🇺 +7</option>
+                  <option value="+250">🇷🇼 +250</option>
+                  <option value="+685">🇼🇸 +685</option>
+                  <option value="+378">🇸🇲 +378</option>
+                  <option value="+966">🇸🇦 +966</option>
+                  <option value="+221">🇸🇳 +221</option>
+                  <option value="+381">🇷🇸 +381</option>
+                  <option value="+248">🇸🇨 +248</option>
+                  <option value="+232">🇸🇱 +232</option>
+                  <option value="+65">🇸🇬 +65</option>
+                  <option value="+421">🇸🇰 +421</option>
+                  <option value="+386">🇸🇮 +386</option>
+                  <option value="+677">🇸🇧 +677</option>
+                  <option value="+252">🇸🇴 +252</option>
+                  <option value="+27">🇿🇦 +27</option>
+                  <option value="+82">🇰🇷 +82</option>
+                  <option value="+211">🇸🇸 +211</option>
+                  <option value="+34">🇪🇸 +34</option>
+                  <option value="+94">🇱🇰 +94</option>
+                  <option value="+249">🇸🇩 +249</option>
+                  <option value="+597">🇸🇷 +597</option>
+                  <option value="+268">🇸🇿 +268</option>
+                  <option value="+46">🇸🇪 +46</option>
+                  <option value="+41">🇨🇭 +41</option>
+                  <option value="+963">🇸🇾 +963</option>
+                  <option value="+886">🇹🇼 +886</option>
+                  <option value="+992">🇹🇯 +992</option>
+                  <option value="+255">🇹🇿 +255</option>
+                  <option value="+66">🇹🇭 +66</option>
+                  <option value="+228">🇹🇬 +228</option>
+                  <option value="+676">🇹🇴 +676</option>
+                  <option value="+216">🇹🇳 +216</option>
+                  <option value="+90">🇹🇷 +90</option>
+                  <option value="+993">🇹🇲 +993</option>
+                  <option value="+256">🇺🇬 +256</option>
+                  <option value="+380">🇺🇦 +380</option>
+                  <option value="+971">🇦🇪 +971</option>
+                  <option value="+44">🇬🇧 +44</option>
+                  <option value="+1">🇺🇸 +1</option>
+                  <option value="+598">🇺🇾 +598</option>
+                  <option value="+998">🇺🇿 +998</option>
+                  <option value="+678">🇻🇺 +678</option>
+                  <option value="+58">🇻🇪 +58</option>
+                  <option value="+84">🇻🇳 +84</option>
+                  <option value="+967">🇾🇪 +967</option>
+                  <option value="+260">🇿🇲 +260</option>
+                  <option value="+263">🇿🇼 +263</option>
+                </select>
+                <input type="tel" id="phone" placeholder="1234567890" required style="flex: 1;" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" id="password" placeholder="••••••••" required />
+              <i class="fa-solid fa-eye password-toggle" id="togglePassword"></i>
+            </div>
+            
+            <h3 class="address-title">Shipping Address</h3>
+            
+            <div class="form-group full-width">
+              <label for="street">Street Address</label>
+              <input type="text" id="street" placeholder="123 Shopping Avenue" required />
+            </div>
+            <div class="form-group">
+              <label for="city">City</label>
+              <input type="text" id="city" placeholder="Your City" required />
+            </div>
+            <div class="form-group">
+              <label for="state">State</label>
+              <input type="text" id="state" placeholder="Your State" required />
+            </div>
+            <div class="form-group">
+              <label for="zip">Zip Code</label>
+              <input type="text" id="zip" placeholder="Pin code" required />
+            </div>
+            <div class="form-group">
+              <label for="country">Country</label>
+              <input type="text" id="country" placeholder="Your Country" required />
+            </div>
+          </div>
+
+          <button type="submit" class="auth-btn">Register Account</button>
+        </form>
+        <div class="auth-link">
+          Already a member? <a href="login.html">Login here</a>
+        </div>
+      </div>
+    </main>
+
+    <script type="module" src="register.js"></script>
+  </body>
+</html>
